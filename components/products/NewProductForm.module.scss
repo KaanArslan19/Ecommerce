@@ -1,0 +1,72 @@
+.container {
+  width: 100%;
+  flex-flow: column;
+}
+
+.form {
+  width: 95%;
+  max-width: 40rem;
+  box-sizing: border-box;
+  margin: 2rem auto;
+}
+
+.control {
+  margin-bottom: 0.8rem;
+}
+
+.control {
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.2rem;
+  }
+  input {
+    width: 100%;
+    outline: none;
+    display: block;
+    font: inherit;
+    border: none;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.268);
+    padding: 0.25rem;
+  }
+  textarea {
+    width: 100%;
+    outline: none;
+    display: block;
+    font: inherit;
+    border: none;
+
+    border: 1px solid rgba(0, 0, 0, 0.268);
+    padding: 0.25rem;
+  }
+}
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+
+  button {
+    font: inherit;
+    cursor: pointer;
+    background-color: #d0fb49;
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border: 1px solid #defb7e;
+    border-radius: 4px;
+    font-weight: bold;
+  }
+  button:hover,
+  button:active {
+    background-color: #defb7e;
+  }
+}
+
+.toggle {
+  margin-top: 1rem;
+  background-color: transparent;
+  color: #000;
+  border: none;
+  padding: 0.15rem 1.5rem;
+}

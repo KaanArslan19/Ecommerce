@@ -1,0 +1,18 @@
+@import "mixins";
+$color-primary: red;
+$color-secondary: blue;
+$color-white: #fff;
+
+.title {
+  color: $color-primary;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@include mobile() {
+  .title {
+    background-color: $color-secondary;
+  }
+}

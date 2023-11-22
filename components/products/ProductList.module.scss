@@ -1,0 +1,42 @@
+.container {
+  width: 100%;
+}
+.listContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.filterBar {
+  display: flex;
+  justify-content: center;
+  border: 2px solid var(--color-primary);
+  background-color: var(--color-secondary);
+  padding: 0.5rem;
+  margin: 1rem;
+  text-transform: uppercase;
+}
+.filterItem {
+  padding: 0.5rem;
+  font-weight: 600;
+  margin-right: 2rem;
+
+  cursor: pointer;
+}
+
+.list {
+  display: inline-grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1200px) {
+  .list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.link {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}

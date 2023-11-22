@@ -1,0 +1,21 @@
+@mixin mobile {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+@mixin largeScreen {
+  @media (min-width: 1441px) {
+    @content;
+  }
+}
+@mixin xLargeScreen {
+  @media (min-width: 1921px) {
+    @content;
+  }
+}
+
+@mixin flexCenter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

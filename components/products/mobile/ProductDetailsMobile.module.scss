@@ -1,0 +1,47 @@
+.container {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  img {
+    display: block;
+    position: relative !important;
+  }
+  h1 {
+    font-size: 2rem;
+    text-transform: uppercase;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  span {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.imgBox {
+  max-width: 100%;
+  z-index: 1;
+}
+.trigger {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  margin-right: 0.5rem;
+  border-bottom: 1px solid var(--color-primary);
+}
+
+.icon {
+  font-size: 3rem;
+  text-align: center;
+  transition: transform 0.3s;
+}
+.iconActive {
+  transform: rotate(180deg);
+}
+.comboContainer {
+  position: relative;
+  width: 200px;
+}
