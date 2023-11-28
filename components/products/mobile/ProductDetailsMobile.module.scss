@@ -41,7 +41,29 @@
 .iconActive {
   transform: rotate(180deg);
 }
-.comboContainer {
-  position: relative;
-  width: 200px;
+
+.sizeBtn {
+  border: 1px solid var(--color-primary-light);
+  padding: 1rem;
+  text-align: center;
+  text-transform: capitalize;
+  font-weight: 600;
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.sizeBtnActive {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+.addToCartBtn {
+  margin-top: 1rem;
+  padding: 1rem;
+  width: 100%;
+  color: var(--color-white);
+  background-color: var(--color-primary);
+  cursor: pointer;
+  &:hover {
+    background-color: var(--color-primary-light);
+  }
 }

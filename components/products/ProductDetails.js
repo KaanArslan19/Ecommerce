@@ -5,21 +5,42 @@ import { MdOutlineArrowDropDown } from "react-icons/md";
 import { urlFor } from "../../lib/client";
 import { useMediaQuery } from "react-responsive";
 import ProductDetailsMobile from "./mobile/ProductDetailsMobile";
+import { useDispatch } from "react-redux";
+import { cartActions } from "@/store/cart-slice";
 
 const ProductDetails = ({ products }) => {
   const [openMenu, setOpenMenu] = useState(false);
+  const [activeSize, setActiveSize] = useState(null);
+  const [sizeSelected, setSizeSelected] = useState(false);
+  const [sizeWarning, setSizeWarning] = useState(false);
+  const dispatch = useDispatch();
   const menuRef = useRef();
   const trigRef = useRef();
   const isMobile = useMediaQuery({
     query: "(max-width: 768px)",
   });
   const triggerHandler = () => {
-    setOpenMenu(true);
-    if (openMenu) {
-      setOpenMenu(false);
+    setOpenMenu(!openMenu);
+  };
+  const sizeClickHandler = (size) => {
+    setActiveSize(size);
+    setSizeSelected(true);
+  };
+  const addToCartHandler = () => {
+    if (sizeSelected) {
+      setSizeWarning(false);
+      dispatch(
+        cartActions.addItemToCart({
+          id: products[0]._id,
+          title: products[0].title,
+          price: products[0].price,
+          image: products[0].imgUrl[0],
+        })
+      );
+    } else {
+      setSizeWarning(true);
     }
   };
-
   return (
     <>
       {isMobile ? (
@@ -40,16 +61,35 @@ const ProductDetails = ({ products }) => {
             />
           </div>
           <div className={classes.right}>
-            <div className={classes.comboContainer}>
-              <select className={classes.combo}>
-                <option>Select Size</option>
-                <option>XS</option>
-                <option>S</option>
-                <option>M</option>
-                <option>L</option>
-                <option>XL</option>
-              </select>
+            <div className={classes.sizesContainer}>
+              {products[0].sizes.map((item, index) => (
+                <button
+                  key={index}
+                  className={
+                    activeSize === item
+                      ? [classes.sizeBtn + " " + classes.sizeBtnActive]
+                      : classes.sizeBtn
+                  }
+                  onClick={() => sizeClickHandler(item)}
+                >
+                  {item}
+                </button>
+              ))}
             </div>
+            <button
+              className={
+                sizeSelected
+                  ? [classes.addToCartBtn + " " + classes.validBtn]
+                  : [classes.addToCartBtn + " " + classes.invalidBtn]
+              }
+              onClick={addToCartHandler}
+            >
+              <span>Add To Bag </span>
+              <span>{products[0].price}</span>
+            </button>
+            {sizeWarning && !sizeSelected && (
+              <p>Please Select a size to Add the Item to your Bag.</p>
+            )}
             <div
               className={classes.trigger}
               ref={trigRef}

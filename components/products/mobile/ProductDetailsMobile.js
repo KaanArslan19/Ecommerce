@@ -7,6 +7,7 @@ import { MdOutlineArrowDropDown } from "react-icons/md";
 const ProductDetailsMobile = ({ products }) => {
   const trigRef = useRef();
   const menuRef = useRef();
+  const [activeSize, setActiveSize] = useState(null);
 
   const [openMenu, setOpenMenu] = useState(false);
   const triggerHandler = () => {
@@ -14,6 +15,9 @@ const ProductDetailsMobile = ({ products }) => {
     if (openMenu) {
       setOpenMenu(false);
     }
+  };
+  const sizeClickHandler = (size) => {
+    setActiveSize(size);
   };
   return (
     <section className={classes.container}>
@@ -29,15 +33,20 @@ const ProductDetailsMobile = ({ products }) => {
 
       <h1>{products[0].title}</h1>
       <span>${products[0].price}</span>
-      <div className={classes.comboContainer}>
-        <select className={classes.combo}>
-          <option>Select Size</option>
-          <option>XS</option>
-          <option>S</option>
-          <option>M</option>
-          <option>L</option>
-          <option>XL</option>
-        </select>
+      <div className={classes.sizesContainer}>
+        {products[0].sizes.map((item, index) => (
+          <button
+            key={index}
+            className={
+              activeSize === item
+                ? [classes.sizeBtn + " " + classes.sizeBtnActive]
+                : classes.sizeBtn
+            }
+            onClick={() => sizeClickHandler(item)}
+          >
+            {item}
+          </button>
+        ))}
       </div>
       <div className={classes.trigger} ref={trigRef} onClick={triggerHandler}>
         <h5> Product Details and Sizing</h5>

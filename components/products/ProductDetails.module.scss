@@ -2,6 +2,7 @@
   padding: 2rem;
   display: flex;
   justify-content: space-between;
+  color: var(--color-primary);
   img {
     display: block;
     position: relative !important;
@@ -10,6 +11,11 @@
     font-size: 2rem;
     text-transform: uppercase;
     margin-bottom: 0.5rem;
+  }
+  p {
+    margin-top: 0.5rem;
+    width: 150px;
+    color: var(--color-red);
   }
 }
 
@@ -41,4 +47,31 @@
   z-index: 1;
   margin-left: 0.5rem;
   margin-right: 0.5rem;
+}
+.sizeBtn {
+  border: 1px solid var(--color-primary-light);
+  padding: 1rem;
+  text-align: center;
+  text-transform: capitalize;
+  font-weight: 600;
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.sizeBtnActive {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+.addToCartBtn {
+  margin-top: 1rem;
+  padding: 1rem;
+  width: 100%;
+  color: var(--color-white);
+  background-color: var(--color-primary);
+  cursor: pointer;
+}
+.validBtn {
+  &:hover {
+    background-color: var(--color-primary-light);
+  }
 }

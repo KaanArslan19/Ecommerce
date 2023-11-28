@@ -1,15 +1,6 @@
 import ProductList from "../../../../components/products/ProductList";
 import { connectToDatabase } from "../../../../lib/db";
 const FilteredProductsPage = ({ products, filters }) => {
-  let filterArray = [];
-  const filterHandler = (input, data) => {
-    data.map((item) => {
-      if (input.includes(item)) {
-        filterArray = [...filterArray, item];
-      }
-      return filterArray;
-    });
-  };
   return (
     <div>
       <ProductList products={products} filters={filters} />

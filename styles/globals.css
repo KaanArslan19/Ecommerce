@@ -1,7 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --color-primary: #242424;
+  --color-primary-light: #24242431;
   --color-secondary: #d0fb49;
+  --color-white: #fff;
+  --color-red: #e1306c;
 }
+
 * {
   box-sizing: border-box;
   padding: 0;

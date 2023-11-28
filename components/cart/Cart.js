@@ -6,12 +6,14 @@ import { BsChevronLeft } from "react-icons/bs";
 import CartItem from "./CartItem";
 import PrimaryButton from "../ui/PrimaryButton";
 import { HiOutlineShoppingBag } from "react-icons/hi";
+import { useSelector } from "react-redux";
 
-const Cart = (props) => {
+const Cart = ({ show }) => {
   const showCartHandler = () => {
-    props.show();
+    show();
   };
-
+  const cartItems = useSelector((state) => state.cart.items);
+  const cartQuantity = useSelector((state) => state.cart.totalQuantity);
   return (
     <div className={classes.wrapper}>
       <div className={classes.container}>
@@ -19,34 +21,50 @@ const Cart = (props) => {
           <button className={classes.topButton} onClick={showCartHandler}>
             <BsChevronLeft />
             <span className={classes.heading}>Your Cart</span>
-            <span className={classes.numberOfItems}>({10} items)</span>
+            <span className={classes.numberOfItems}>
+              ({cartQuantity} items)
+            </span>
           </button>
         </div>
         <div className={classes.cartMiddle}>
-          <div className={classes.emptyCart}>
-            <HiOutlineShoppingBag className={classes.shoppingBagIcon} />
-            <h3> Your Shopping bag is empty </h3>
+          {cartQuantity === 0 && (
+            <div className={classes.emptyCart}>
+              <HiOutlineShoppingBag className={classes.shoppingBagIcon} />
+              <h3> Your Shopping bag is empty </h3>
 
-            <Link href="/">
-              <PrimaryButton type="button" onClick={showCartHandler}>
-                Continue Shopping
-              </PrimaryButton>
-            </Link>
-          </div>
-          <div className={classes.productContainer}>
-            <CartItem />
-          </div>
+              <Link href="/">
+                <PrimaryButton type="button">Continue Shopping</PrimaryButton>
+              </Link>
+            </div>
+          )}
+          <ul className={classes.productContainer}>
+            {cartItems.map((item) => (
+              <CartItem
+                key={item.id}
+                item={{
+                  id: item.id,
+                  title: item.title,
+                  image: item.image,
+                  quantity: item.quantity,
+                  totalPrice: item.totalPrice,
+                  price: item.price,
+                }}
+              />
+            ))}
+          </ul>
         </div>
 
-        <div className={classes.cartBottom}>
-          <div className={classes.totalPrice}>
-            <h3>Subtotal: </h3>
-            <h3>$ Total Price will be Here</h3>
+        {cartQuantity !== 0 && (
+          <div className={classes.cartBottom}>
+            <div className={classes.totalPrice}>
+              <h3>Subtotal: </h3>
+              <h3>$ Total Price will be Here</h3>
+            </div>
+            <div className={classes.buttonContainer}>
+              <PrimaryButton type="button">Pay with Stripe</PrimaryButton>
+            </div>
           </div>
-          <div className={classes.buttonContainer}>
-            <PrimaryButton type="button">Pay with Stripe</PrimaryButton>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );

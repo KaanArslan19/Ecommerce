@@ -13,7 +13,6 @@ const ProductItem = (props) => {
   const showDetailsHandler = () => {
     router.push("/product/" + props.id);
   };
-  console.log(props.sizes);
 
   return (
     <li className={classes.container}>
@@ -32,8 +31,10 @@ const ProductItem = (props) => {
           <h5>{props.title}</h5>
           <span>${props.price}</span>
           <div>
-            {props.sizes.map((item) => (
-              <span className={classes.sizeItem}>{item}</span>
+            {props.sizes.map((item, index) => (
+              <span key={index} className={classes.sizeItem}>
+                {item}
+              </span>
             ))}
           </div>
         </div>

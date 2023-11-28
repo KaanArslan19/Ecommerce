@@ -8,23 +8,18 @@
 
   transition: all 1s ease-in-out;
 }
-
 .container {
   height: 100vh;
+  width: 600px;
   background-color: white;
-  float: right;
   display: flex;
+  float: right;
   justify-content: space-between;
   flex-direction: column;
 
   position: relative;
 }
 
-@media (min-width: 600px) {
-  .container {
-    width: 600px;
-  }
-}
 @media (max-width: 600px) {
   .container {
     width: 100vw;
@@ -38,9 +33,11 @@
 
 .cartMiddle {
   padding: 32px 8px;
+  overflow-y: scroll;
 }
 
 .cartBottom {
+  margin: 1rem;
   padding: 32px 8px;
 }
 
@@ -50,24 +47,25 @@
   color: black;
   border: none;
   cursor: pointer;
+
+  span {
+    padding-left: 5px;
+  }
 }
 
-.topButton span {
-  padding-left: 5px;
-}
 .emptyCart {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  h3 {
+    margin-bottom: 2rem;
+  }
 }
 .shoppingBagIcon {
   width: 150px;
   height: 150px;
   margin-bottom: 10px;
-}
-
-.emptyCart h3 {
-  margin-bottom: 30px;
 }
 
 .totalPrice {

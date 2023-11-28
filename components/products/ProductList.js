@@ -9,7 +9,6 @@ const ProductList = ({ products }) => {
   const uniqueArray = productTypes.filter((value, index, self) => {
     return self.indexOf(value) === index;
   });
-  console.log(products);
   return (
     <div className={classes.container}>
       <div className={classes.filterBar}>

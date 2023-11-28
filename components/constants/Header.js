@@ -4,19 +4,21 @@ import Link from "next/link";
 
 import { MdOutlineSearch } from "react-icons/md";
 import { VscAccount } from "react-icons/vsc";
-import { AiOutlineLogout } from "react-icons/ai";
 import classes from "./Header.module.scss";
 import Cart from "../cart/Cart";
 import { useRouter } from "next/router";
 import { VscMenu } from "react-icons/vsc";
 import { useMediaQuery } from "react-responsive";
+import { useDispatch, useSelector } from "react-redux";
+import { uiActions } from "@/store/ui-slice";
 const Header = () => {
   const router = useRouter();
-  const [showCart, setShowCart] = useState(false);
+  const showCart = useSelector((state) => state.ui.cartIsVisible);
+  const cartQuantity = useSelector((state) => state.cart.totalQuantity);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const searchInputRef = useRef();
   const [enteredValue, setEnteredValue] = useState("");
-
+  const dispatch = useDispatch();
   const [searchInputClicked, setSearchInputClicked] = useState(false);
   const isMobile = useMediaQuery({
     query: "(max-width: 768px)",
@@ -34,13 +36,12 @@ const Header = () => {
     router.push("/search/" + enteredValue);
     setEnteredValue("");
   };
-  const showMobileMenuHandler = () => {};
-
-  const signOutHandler = () => {
-    signOut();
+  const showMobileMenuHandler = () => {
+    setShowMobileMenu(!showMobileMenu);
   };
+
   const showCartHandler = () => {
-    setShowCart(!showCart);
+    dispatch(uiActions.toggle());
   };
 
   return (
@@ -63,8 +64,10 @@ const Header = () => {
             </Link>
             <button onClick={showCartHandler} className={classes.button}>
               <BsBag />
+              {cartQuantity !== 0 && (
+                <span className={classes.itemCounter}>{cartQuantity}</span>
+              )}
             </button>
-
             {showCart && <Cart show={showCartHandler} />}
           </div>
         )}
