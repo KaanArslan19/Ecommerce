@@ -10,8 +10,7 @@
   @include flexCenter();
 }
 .icon {
-  background-color: transparent;
-  color: black;
+  color: var(--color-primary);
   font-size: 24px;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -33,9 +32,9 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  color: black;
-  font-size: 26px;
-  padding-left: 1rem;
+  color: var(--color-primary);
+  font-size: 1.5rem;
+  margin-right: 1rem;
   border: none;
 }
 

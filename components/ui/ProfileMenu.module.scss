@@ -1,0 +1,23 @@
+@import "../../styles/mixins";
+.profileBtn {
+  color: var(--color-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  margin-top: 2px;
+}
+.icon {
+  margin-right: 0.5rem;
+}
+
+.menuItemContainer {
+  color: var(--color-primary);
+}
+.menuItem {
+  display: flex !important;
+  align-items: center;
+  &:hover {
+    background-color: var(--color-primary-light);
+  }
+}

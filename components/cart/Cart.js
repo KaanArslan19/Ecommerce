@@ -8,17 +8,14 @@ import PrimaryButton from "../ui/PrimaryButton";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { useSelector } from "react-redux";
 
-const Cart = ({ show }) => {
-  const showCartHandler = () => {
-    show();
-  };
+const Cart = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const cartQuantity = useSelector((state) => state.cart.totalQuantity);
   return (
     <div className={classes.wrapper}>
       <div className={classes.container}>
         <div className={classes.cartTop}>
-          <button className={classes.topButton} onClick={showCartHandler}>
+          <button className={classes.topButton}>
             <BsChevronLeft />
             <span className={classes.heading}>Your Cart</span>
             <span className={classes.numberOfItems}>
