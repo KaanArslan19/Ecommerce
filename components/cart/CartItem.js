@@ -4,7 +4,7 @@ import { MdOutlineCancel, MdAdd, MdRemove } from "react-icons/md";
 import classes from "./CartItem.module.scss";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
-import { cartActions } from "@/store/cart-slice";
+import { cartActions } from "../../store/cart-slice";
 const CartItem = ({ item }) => {
   const dispatch = useDispatch();
   const addItemHandler = () => {

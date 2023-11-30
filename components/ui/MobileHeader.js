@@ -1,8 +1,6 @@
 import classes from "./MobileHeader.module.scss";
 import {
   Drawer,
-  Typography,
-  IconButton,
   List,
   ListItem,
   ListItemPrefix,
@@ -14,7 +12,7 @@ import { BsBag } from "react-icons/bs";
 import { PiChartBarLight } from "react-icons/pi";
 import { FiLogOut } from "react-icons/fi";
 import Link from "next/link";
-import useAuth from "@hooks/useAuth";
+import useAuth from "@/hooks/useAuth";
 
 const MobileHeader = ({ show }) => {
   const showCartHandler = () => {

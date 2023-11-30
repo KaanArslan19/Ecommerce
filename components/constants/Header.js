@@ -3,18 +3,15 @@ import { BsBag } from "react-icons/bs";
 import Link from "next/link";
 
 import { MdOutlineSearch } from "react-icons/md";
-import { VscAccount } from "react-icons/vsc";
 import classes from "./Header.module.scss";
 import { useRouter } from "next/router";
 import { VscMenu } from "react-icons/vsc";
 import { useMediaQuery } from "react-responsive";
 import { useSelector } from "react-redux";
-import useAuth from "@/hooks/useAuth";
 import MobileHeader from "../ui/MobileHeader";
 import ProfileMenu from "../ui/ProfileMenu";
 
 const Header = () => {
-  const { loading, loggedIn } = useAuth();
   const router = useRouter();
   const cartQuantity = useSelector((state) => state.cart.totalQuantity);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -40,7 +37,6 @@ const Header = () => {
   const showMobileMenuHandler = () => {
     setShowMobileMenu(!showMobileMenu);
   };
-  const showProfileMenuHandler = () => {};
 
   return (
     <div className={classes.container}>
@@ -66,7 +62,6 @@ const Header = () => {
                 <span className={classes.itemCounter}>{cartQuantity}</span>
               )}
             </Link>
-            <button onClick={showProfileMenuHandler}></button>
             <ProfileMenu />
           </div>
         )}
