@@ -13,6 +13,7 @@ import { FiLogOut } from "react-icons/fi";
 import Link from "next/link";
 import { BsBag } from "react-icons/bs";
 import useAuth from "@/hooks/useAuth";
+import SignOutButton from "./SignOutButton";
 const ProfileMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const closeMenu = () => setIsMenuOpen(false);
@@ -58,14 +59,33 @@ const ProfileMenu = () => {
               </MenuItem>
             </Link>
           ) : null}
-          <Link href="/" className={classes.menuItemContainer}>
-            <MenuItem className={classes.menuItem}>
-              <p className="flex items-center gap-2 rounded">
-                <FiLogOut />
-                <span>Sign Out</span>
-              </p>
-            </MenuItem>
-          </Link>
+          {loggedIn ? (
+            <Link href="/" className={classes.menuItemContainer}>
+              <MenuItem className={classes.menuItem}>
+                <SignOutButton>
+                  <p className="flex items-center gap-2 rounded">
+                    <FiLogOut />
+                    <span>Sign Out</span>
+                  </p>
+                </SignOutButton>
+              </MenuItem>
+            </Link>
+          ) : (
+            <div className="flex items-center">
+              <Link
+                className="px-4 py-1 flex-1 text-center"
+                href="/auth/sign-in"
+              >
+                Sign in
+              </Link>
+              <Link
+                className="bg-primary-color text-white px-4 py-1 rounded flex-1 text-center"
+                href="/auth/sign-up"
+              >
+                Sign up
+              </Link>
+            </div>
+          )}
         </MenuList>
       )}
     </Menu>

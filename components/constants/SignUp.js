@@ -6,6 +6,8 @@ import AuthFormContainer from "../ui/AuthFormContainer";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { filterFormikErrors } from "@/utils/formikHelpers";
+import { toast } from "react-toastify";
+import Link from "next/link";
 
 const validationSchema = yup.object().shape({
   name: yup.string().required("Name is required!"),
@@ -15,7 +17,7 @@ const validationSchema = yup.object().shape({
     .min(8, "Password must be at least 8 characters.")
     .required("Password is required!"),
 });
-export default function SignUp() {
+const SignUp = () => {
   const {
     values,
     handleChange,
@@ -37,8 +39,8 @@ export default function SignUp() {
         body: JSON.stringify(values),
       }).then(async (res) => {
         if (res.ok) {
-          const result = await res.json();
-          console.log(result);
+          const { message } = await res.json();
+          toast.success(message);
         }
         action.setSubmitting(false);
       });
@@ -46,6 +48,10 @@ export default function SignUp() {
   });
   const { name, email, password } = values;
   const formErrors = filterFormikErrors(errors, touched, values);
+  const error = (name) => {
+    return errors[name] && touched[name] ? true : false;
+  };
+
   return (
     <AuthFormContainer title="Create New Account" onSubmit={handleSubmit}>
       <Input
@@ -54,6 +60,7 @@ export default function SignUp() {
         onChange={handleChange}
         onBlur={handleBlur}
         value={name}
+        error={error("name")}
       />
       <Input
         name="email"
@@ -61,6 +68,7 @@ export default function SignUp() {
         onChange={handleChange}
         onBlur={handleBlur}
         value={email}
+        error={error("email")}
       />
       <Input
         name="password"
@@ -69,6 +77,7 @@ export default function SignUp() {
         onChange={handleChange}
         onBlur={handleBlur}
         value={password}
+        error={error("password")}
       />
       <Button
         disabled={isSubmitting}
@@ -77,6 +86,10 @@ export default function SignUp() {
       >
         Sign up
       </Button>
+      <div className="flex items-center justify-between">
+        <Link href="/auth/sign-in">Sign in</Link>
+        <Link href="/auth/forget-password">Forget password</Link>
+      </div>
       <div className="">
         {formErrors.map((err) => {
           return (
@@ -92,4 +105,6 @@ export default function SignUp() {
       </div>
     </AuthFormContainer>
   );
-}
+};
+
+export default SignUp;

@@ -1,7 +1,8 @@
 import React from "react";
+import SignIn from "../../../components/constants/SignIn";
 
 const SignInPage = () => {
-  return <div>SignInPage</div>;
+  return <SignIn />;
 };
 
 export default SignInPage;

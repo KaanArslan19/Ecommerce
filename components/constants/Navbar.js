@@ -1,5 +1,6 @@
 import Link from "next/link";
 import classes from "./Navbar.module.scss";
+import { getServerSession } from "next-auth";
 const NavItems = [
   { name: "New Arrivals", url: "/new-arrivals" },
   { name: "Ready to Wear", url: "/ready-to-wear" },

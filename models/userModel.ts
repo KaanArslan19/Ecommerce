@@ -1,4 +1,4 @@
-import { compare, genSalt, hash } from "bcryptjs";
+import { compare, genSalt, hash } from "bcrypt";
 import { Document, Schema, Model, model, models } from "mongoose";
 interface UserDocument extends Document {
   email: string;

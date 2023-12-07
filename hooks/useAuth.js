@@ -1,7 +1,10 @@
+import { useSession } from "next-auth/react";
+
 const useAuth = () => {
+  const session = useSession();
   return {
-    loading: false,
-    loggedIn: true,
+    loading: session.status === "loading",
+    loggedIn: session.status === "authenticated",
     isAdmin: true,
   };
 };

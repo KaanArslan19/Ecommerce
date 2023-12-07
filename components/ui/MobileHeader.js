@@ -13,6 +13,7 @@ import { PiChartBarLight } from "react-icons/pi";
 import { FiLogOut } from "react-icons/fi";
 import Link from "next/link";
 import useAuth from "@/hooks/useAuth";
+import SignOutButton from "./SignOutButton";
 
 const MobileHeader = ({ show }) => {
   const showCartHandler = () => {
@@ -57,19 +58,21 @@ const MobileHeader = ({ show }) => {
         ) : null}
 
         {loggedIn ? (
-          <ListItem className={classes.listItem}>
-            <ListItemPrefix>
-              <FiLogOut className={classes.icon} />
-            </ListItemPrefix>
-            Sign Out
-          </ListItem>
+          <SignOutButton>
+            <ListItem className={classes.listItem}>
+              <ListItemPrefix>
+                <FiLogOut className={classes.icon} />
+              </ListItemPrefix>
+              Sign Out
+            </ListItem>
+          </SignOutButton>
         ) : (
           <div className="flex items-center">
             <Link className="px-4 py-1 flex-1 text-center" href="/auth/signin">
               Sign in
             </Link>
             <Link
-              className="bg-blue-500 text-white px-4 py-1 rounded flex-1 text-center"
+              className="bg-primary-color text-white px-4 py-1 rounded flex-1 text-center"
               href="/auth/signup"
             >
               Sign up
