@@ -6,7 +6,7 @@ import React from "react";
 import { useFormik } from "formik";
 import Link from "next/link";
 import * as yup from "yup";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 const validationSchema = yup.object().shape({
@@ -18,8 +18,6 @@ const validationSchema = yup.object().shape({
 });
 const SignIn = () => {
   const router = useRouter();
-  const session = useSession();
-  console.log(session);
 
   const {
     values,

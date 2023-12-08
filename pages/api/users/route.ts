@@ -3,8 +3,8 @@ import EmailVerificationToken from "@/models/emailVerificationToken";
 import UserModel from "@/models/userModel";
 import { NewUserRequest } from "@/types";
 import type { NextApiRequest, NextApiResponse } from "next";
-import nodemailer from "nodemailer";
 import crypto from "crypto";
+import { sendEmail } from "@/lib/email";
 type ResponseData = {
   message: string;
 };
@@ -25,19 +25,11 @@ const POST = async (
       token,
     });
 
-    var transport = nodemailer.createTransport({
-      host: process.env.MAILTRAP_HOST,
-      port: 2525,
-      auth: {
-        user: process.env.MAILTRAP_AUTH_USER,
-        pass: process.env.MAILTRAP_AUTH_PASS,
-      },
-    });
-    const verificationUrl = `http://localhost:3000/verify?token=${token}&userId=${newUser._id}`;
-    await transport.sendMail({
-      from: "verification@nextecom.com",
-      to: newUser.email,
-      html: `<h1> Please verify your email by clicking on <a href=${verificationUrl}>this link</a> </h1>`,
+    const verificationUrl = `${process.env.VERIFICATION_URL}?token=${token}&userId=${newUser._id}`;
+    await sendEmail({
+      profile: { name: newUser.name, email: newUser.email },
+      subject: "verification",
+      linkUrl: verificationUrl,
     });
 
     return res.json({ message: "Please check your email!" });

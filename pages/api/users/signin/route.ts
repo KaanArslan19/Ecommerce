@@ -24,7 +24,13 @@ const POST = async (req: NextApiRequest, res: NextApiResponse) => {
     });
 
   return res.json({
-    user: { id: user._id.toString(), name: user.name, role: user.role },
+    user: {
+      id: user._id.toString(),
+      name: user.name,
+      role: user.role,
+      verified: user.verified,
+      email: user.email,
+    },
   });
 };
 export default POST;

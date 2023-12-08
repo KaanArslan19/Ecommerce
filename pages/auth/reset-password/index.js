@@ -6,7 +6,6 @@ import UpdatePassword from "../../../components/constants/UpdatePassword";
 
 const ResetPasswordPage = ({ token, userId }) => {
   const router = useRouter();
-  console.log(token, userId);
   useEffect(() => {
     if (!token || !userId || token === "" || userId === "") {
       router.push("/404");
@@ -25,7 +24,7 @@ const ResetPasswordPage = ({ token, userId }) => {
       if (!res.ok && error) {
         router.replace("/404");
       }
-    }, 1000);
+    });
   }, [token, userId, router]);
   return <UpdatePassword token={token} userId={userId} />;
 };

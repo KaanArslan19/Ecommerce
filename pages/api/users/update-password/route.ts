@@ -1,7 +1,8 @@
 import startDb from "@/lib/db";
+import { sendEmail } from "@/lib/email";
 import PasswordResetTokenModel from "@/models/passwordResetToken";
 import UserModel from "@/models/userModel";
-import { ForgetPasswordRequest, UpdatePasswordRequest } from "@/types";
+import { UpdatePasswordRequest } from "@/types";
 import { isValidObjectId } from "mongoose";
 import { NextApiRequest, NextApiResponse } from "next";
 import nodemailer from "nodemailer";
@@ -10,7 +11,6 @@ const POST = async (req: NextApiRequest, res: NextApiResponse) => {
     const { password, token, userId } =
       (await req.body) as UpdatePasswordRequest;
 
-    console.log(password, token, userId);
     if (!password || !token || !isValidObjectId(userId))
       return res.status(401).json({ error: "Invalid request!" });
 
@@ -46,19 +46,9 @@ const POST = async (req: NextApiRequest, res: NextApiResponse) => {
 
     await PasswordResetTokenModel.findByIdAndDelete(resetToken._id);
 
-    var transport = nodemailer.createTransport({
-      host: process.env.MAILTRAP_HOST,
-      port: 2525,
-      auth: {
-        user: process.env.MAILTRAP_AUTH_USER,
-        pass: process.env.MAILTRAP_AUTH_PASS,
-      },
-    });
-
-    await transport.sendMail({
-      from: "verification@nextecom.com",
-      to: user.email,
-      html: `<h1>Your password is now changed. </h1>`,
+    await sendEmail({
+      profile: { name: user.name, email: user.email },
+      subject: "password-changed",
     });
 
     return res.json({ message: "Your password is now changed." });

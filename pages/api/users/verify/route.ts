@@ -3,13 +3,8 @@ import UserModel from "@/models/userModel";
 import { EmailVerifyRequest } from "@/types";
 import { isValidObjectId } from "mongoose";
 import { NextApiRequest, NextApiResponse } from "next";
-type ResponseData = {
-  error: string;
-};
-const POST = async (
-  req: NextApiRequest,
-  res: NextApiResponse<ResponseData>
-) => {
+
+const POST = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { token, userId } = (await req.body) as EmailVerifyRequest;
     if (!isValidObjectId(userId) || !token) {
@@ -31,7 +26,7 @@ const POST = async (
     }
     await UserModel.findByIdAndUpdate(userId, { verified: true });
     await EmailVerificationToken.findByIdAndDelete(verifyToken._id);
-    return res.json({ error: "Your email is verified." });
+    return res.json({ message: "Your email is verified." });
   } catch (error) {
     throw new Error(error);
   }

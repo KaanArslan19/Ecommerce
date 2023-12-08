@@ -6,6 +6,7 @@ const useAuth = () => {
     loading: session.status === "loading",
     loggedIn: session.status === "authenticated",
     isAdmin: true,
+    profile: session.data?.user,
   };
 };
 

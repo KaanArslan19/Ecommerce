@@ -27,14 +27,20 @@ export default async function auth(req, res) {
   const callbacks = {
     async jwt(params) {
       if (params.user) {
-        params.token.user = params.user;
+        params.token = { ...params.token, ...params.user };
       }
       return params.token;
     },
     async session(params) {
-      const user = params.token.user;
+      const user = params.token;
       if (user) {
-        params.session.user = { ...params.session.user, ...user };
+        params.session.user = {
+          ...params.session.user,
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          verified: user.verified,
+        };
       }
       return params.session;
     },
